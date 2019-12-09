@@ -50,11 +50,8 @@ def create_sqlite_table(conn):
      favorite_color text NOT NULL,
      date_of_birth text NOT NULL
      ); """
-    try:
-        c = conn.cursor()
-        c.execute(sql_create_table_statement)
-    except Error as e:
-        print(e)
+    c = conn.cursor()
+    c.execute(sql_create_table_statement)
 
 def insert_into_sqlite_table(conn, record):
     sql_insert_statement = \
@@ -72,13 +69,23 @@ def readin_file_to_db(conn):
         for line in data:
             if fileinput.isfirstline(): # skip first line of files
                 continue
-            line_vals = re.split(', | \| | ', line)
-            last_name, first_name, gender, favorite_color, date_of_birth = \
-                line_vals
-            date_of_birth = date_of_birth.replace('\n', '')
-            new_line_vals = (last_name, first_name, gender, favorite_color,
-                date_of_birth)
-            insert_into_sqlite_table(conn, new_line_vals)
+            parsed_line = parse_data_line(line)
+            # line_vals = re.split(', | \| | ', line)
+            # last_name, first_name, gender, favorite_color, date_of_birth = \
+            #     line_vals
+            # date_of_birth = date_of_birth.replace('\n', '')
+            # new_line_vals = (last_name, first_name, gender, favorite_color,
+            #     date_of_birth)
+            insert_into_sqlite_table(conn, parsed_line)
+
+def parse_data_line(line):
+    line_vals = re.split(', | \| | ', line)
+    last_name, first_name, gender, favorite_color, date_of_birth = \
+        line_vals
+    date_of_birth = date_of_birth.replace('\n', '')
+    new_line_vals = (last_name, first_name, gender, favorite_color,
+        date_of_birth)
+    return new_line_vals
 
 def transform_date_string(date):
     """

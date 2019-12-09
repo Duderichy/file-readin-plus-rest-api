@@ -1,0 +1,8 @@
+foobar
+Bibeault Richard Male Green 1000-10-11
+Bar Foo Female Orange 2000-10-01
+Baz Bat Female Purple 2001-10-11
+Car Go Male Pink 2002-01-01
+Dare Get Female Pink 2002-02-10
+Dag Gefjd Female Pink 0999-05-04
+Free Gotten Female Pink 1010-01-01

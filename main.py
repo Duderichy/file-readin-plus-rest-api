@@ -70,12 +70,6 @@ def readin_file_to_db(conn):
             if fileinput.isfirstline(): # skip first line of files
                 continue
             parsed_line = parse_data_line(line)
-            # line_vals = re.split(', | \| | ', line)
-            # last_name, first_name, gender, favorite_color, date_of_birth = \
-            #     line_vals
-            # date_of_birth = date_of_birth.replace('\n', '')
-            # new_line_vals = (last_name, first_name, gender, favorite_color,
-            #     date_of_birth)
             insert_into_sqlite_table(conn, parsed_line)
 
 def parse_data_line(line):

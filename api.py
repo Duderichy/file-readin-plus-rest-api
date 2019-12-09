@@ -33,14 +33,14 @@ class Records(Resource):
     def get(self, get_by):
         db = get_conn()
         if get_by not in Records.record_getters:
-            return {'message' : 'Resource not found', 'data' : []} , 404
+            return {'message' : 'Resource not found', 'data' : []}, 404
         function = Records.record_getters[get_by]
 
         keys = ('last_name', 'first_name', 'gender', 'color', 'dateofbirth')
         rows = function(db)
 
         dictionary_list = rows_to_dictionary(rows, keys)
-        return dictionary_list , 200
+        return dictionary_list, 200
 
 
 class AddRecord(Resource):
@@ -55,7 +55,7 @@ class AddRecord(Resource):
 
         insert_into_sqlite_table(db, parsed_line)
         db.commit()
-        return {'message' : 'data successfully parsed and added'} , 201
+        return {'message' : 'data successfully parsed and added'}, 201
 
 api.add_resource(Records, '/records/<string:get_by>')
 
